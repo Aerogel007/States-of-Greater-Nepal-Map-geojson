@@ -64,9 +64,9 @@ Map of most of the states in greater Nepal before the Unification Campaign
 | 53 | Duryal | Baisye |
 | 54 | Dailekh | Baisye |
 | 55 | Bilaspur | Baisye |
-| 56 | Jumla | Baisye |
-| 57 | Rolpa | Baisye |
-| 58 | Chilli | Baisye |
+| 56 | Banfikot | Baisye |
+| 57 | Jumla | Baisye |
+| 58 | Rolpa | Baisye |
 | 59 | Dang | Baisye |
 | 60 | Doti | Baisye |
 | 61 | Lamjung | Chaubise |
@@ -179,3 +179,6 @@ Map of most of the states in greater Nepal before the Unification Campaign
 - Tatahun
 - Theog
 - Wigha
+
+Known mistakes:
+- Banfikot is south of Muskot but it should be adjacent North
