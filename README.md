@@ -121,61 +121,61 @@ Map of most of the states in greater Nepal before the Unification Campaign
 | 110 | Garhwal | Uttarkhand |
 
 #Other potential states but not in the map:
-Bamphi
-Beeja
-Bhagul
-Biskot
-Bhujee
-Bughat
-Bulson
-Burrowlee
-Chinese Tartary
-Comharsain
-Cotrach
-Dalhang
-Darimeka
-Deorali
-Dhamee
-Dudoo Kuwau
-Dhurkottee
-Dulaitoo
-Durryal
-Gajkot
-Ghoond
-Ghopriakot
-Goriakot
-Jhili
-Joobul
-Kaikho
-Kalagaon
-Kearie
-Keonthul
-Khottar
-Khumri
-Khuprikot
-Konyar
-Kotee
-Kotegurh
-Kunaitoo
-Kurrungloo
-Ladakh
-Luttahoon
-Majal
-Malliganta
-Mellianta
-Mulog
-Nawur
-Parthana
-Poin
-Pokhara
-Poondur
-Raeen
-Sare
-Satatala
-Shangree
-Sikh States
-Tadiagarha
-Tarki
-Tatahun
-Theog
-Wigha
+- Bamphi
+- Beeja
+- Bhagul
+- Biskot
+- Bhujee
+- Bughat
+- Bulson
+- Burrowlee
+- Chinese Tartary
+- Comharsain
+- Cotrach
+- Dalhang
+- Darimeka
+- Deorali
+- Dhamee
+- Dudoo Kuwau
+- Dhurkottee
+- Dulaitoo
+- Durryal
+- Gajkot
+- Ghoond
+- Ghopriakot
+- Goriakot
+- Jhili
+- Joobul
+- Kaikho
+- Kalagaon
+- Kearie
+- Keonthul
+- Khottar
+- Khumri
+- Khuprikot
+- Konyar
+- Kotee
+- Kotegurh
+- Kunaitoo
+- Kurrungloo
+- Ladakh
+- Luttahoon
+- Majal
+- Malliganta
+- Mellianta
+- Mulog
+- Nawur
+- Parthana
+- Poin
+- Pokhara
+- Poondur
+- Raeen
+- Sare
+- Satatala
+- Shangree
+- Sikh States
+- Tadiagarha
+- Tarki
+- Tatahun
+- Theog
+- Wigha
