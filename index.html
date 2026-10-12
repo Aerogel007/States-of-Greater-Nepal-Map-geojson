@@ -10,7 +10,9 @@
 <script src="https://unpkg.com/maplibre-gl@5.0.0/dist/maplibre-gl.js"></script>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
@@ -33,7 +35,9 @@ body {
   inset: 0 0 0 280px;
 }
 
-h2 { font-size: 19px; }
+h2 {
+  font-size: 19px;
+}
 
 h3 {
   font-size: 14px;
@@ -51,7 +55,9 @@ label {
   cursor: pointer;
 }
 
-input { cursor: pointer; }
+input {
+  cursor: pointer;
+}
 
 .swatch {
   width: 12px;
@@ -67,16 +73,25 @@ input { cursor: pointer; }
   overflow-wrap: anywhere;
 }
 
-.error { color: #c00; }
+.error {
+  color: #c00;
+}
 
 @media (max-width: 600px) {
-  #panel { width: 180px; padding: 9px; }
-  #map { left: 180px; }
+  #panel {
+    width: 180px;
+    padding: 9px;
+  }
+
+  #map {
+    left: 180px;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <aside id="panel">
   <h2>Historical Territories</h2>
   <p>Himalayan historical boundaries</p>
@@ -89,19 +104,14 @@ input { cursor: pointer; }
 <script>
 const groups = [
   {
-    name: "Kirat Territories",
+    name: "Region",
     layers: [
       { name: "Kirat", file: "Kirat.geojson", color: "#d97732" },
       { name: "Kirat Chiefs", file: "Kirat Chiefs.geojson", color: "#b45309" },
       { name: "Baisye", file: "Baisye.geojson", color: "#eab308" },
       { name: "Bagmati", file: "Bagmati.geojson", color: "#ca8a04" },
       { name: "Chaubise", file: "Chaubise.geojson", color: "#16a34a" },
-      { name: "Eastern Sen", file: "Eastern Sen.geojson", color: "#0d9488" }
-    ]
-  },
-  {
-    name: "Other Historical Territories",
-    layers: [
+      { name: "Eastern Sen", file: "Eastern Sen.geojson", color: "#0d9488" },
       { name: "Gorkha", file: "Gorkha.geojson", color: "#2563eb" },
       { name: "Himanchal", file: "Himanchal.geojson", color: "#7c3aed" },
       { name: "Sikkim", file: "Sikkim.geojson", color: "#db2777" },
@@ -116,7 +126,11 @@ const groups = [
         file: "Mountains (above 5000m).geojson",
         color: "#64748b"
       },
-      { name: "Outline", file: "Outline.geojson", color: "#dc2626" }
+      {
+        name: "Outline",
+        file: "Outline.geojson",
+        color: "#dc2626"
+      }
     ]
   }
 ];
@@ -124,11 +138,8 @@ const groups = [
 const panel = document.getElementById("layers");
 const status = document.getElementById("status");
 const controls = [];
-const allLayers = groups.flatMap((group, gi) =>
-  group.layers.map((layer, li) => ({ ...layer, gi, li }))
-);
 
-// Create individual controls immediately.
+// Create the layer controls.
 groups.forEach((group, gi) => {
   const heading = document.createElement("h3");
   heading.textContent = group.name;
@@ -156,7 +167,8 @@ groups.forEach((group, gi) => {
 });
 
 if (!window.maplibregl) {
-  status.textContent = "MapLibre failed to load. Check your internet connection.";
+  status.textContent =
+    "MapLibre failed to load. Check your internet connection.";
   status.className = "error";
 } else {
   const map = new maplibregl.Map({
@@ -178,12 +190,13 @@ if (!window.maplibregl) {
 
     for (const item of controls) {
       const { checkbox, label, layer, gi, li } = item;
+
       const id = `layer-${gi}-${li}`;
       const fillId = `${id}-fill`;
       const lineId = `${id}-line`;
 
       try {
-        // Files are assumed to be in the repository root.
+        // GeoJSON files must be in the same folder as index.html.
         const url = new URL(
           encodeURI(layer.file),
           document.baseURI
@@ -203,7 +216,7 @@ if (!window.maplibregl) {
 
         map.addSource(id, {
           type: "geojson",
-          data
+          data: data
         });
 
         map.addLayer({
@@ -226,18 +239,34 @@ if (!window.maplibregl) {
           }
         });
 
+        // Toggle layer visibility.
         checkbox.addEventListener("change", () => {
-          const visibility = checkbox.checked ? "visible" : "none";
-          map.setLayoutProperty(fillId, "visibility", visibility);
-          map.setLayoutProperty(lineId, "visibility", visibility);
+          const visibility = checkbox.checked
+            ? "visible"
+            : "none";
+
+          map.setLayoutProperty(
+            fillId,
+            "visibility",
+            visibility
+          );
+
+          map.setLayoutProperty(
+            lineId,
+            "visibility",
+            visibility
+          );
         });
 
+        // Show feature information when clicked.
         map.on("click", fillId, event => {
           const feature = event.features?.[0];
+
           if (!feature) return;
 
           const popup = document.createElement("div");
           const title = document.createElement("strong");
+
           title.textContent = layer.name;
           popup.appendChild(title);
 
@@ -255,6 +284,7 @@ if (!window.maplibregl) {
             .addTo(map);
         });
 
+        // Change cursor when hovering over a region.
         map.on("mouseenter", fillId, () => {
           map.getCanvas().style.cursor = "pointer";
         });
@@ -266,20 +296,25 @@ if (!window.maplibregl) {
         loaded++;
       } catch (error) {
         failed++;
+
         checkbox.checked = false;
         label.classList.add("error");
         label.title = `${layer.file}: ${error.message}`;
+
         console.error(`Failed: ${layer.file}`, error);
       }
 
       status.textContent =
         `${loaded} of ${loaded + failed} layers loaded` +
-        (failed ? `; ${failed} failed. Hover over a red layer for details.` : ".");
+        (failed
+          ? `; ${failed} failed. Hover over a red layer for details.`
+          : ".");
     }
   });
 
   map.on("load", () => map.resize());
 }
 </script>
+
 </body>
 </html>
