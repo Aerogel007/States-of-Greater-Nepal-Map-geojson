@@ -11,17 +11,48 @@
 <style>
 * { box-sizing: border-box; }
 body { margin: 0; font-family: Arial, sans-serif; }
+
 #panel {
-  position: absolute; top: 0; left: 0; bottom: 0;
-  width: 280px; padding: 14px; overflow-y: auto;
-  background: #fff; border-right: 1px solid #ddd;
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 280px;
+  padding: 14px;
+  overflow-y: auto;
+  background: #fff;
+  border-right: 1px solid #ddd;
+  z-index: 2;
 }
-#map { position: absolute; top: 0; right: 0; bottom: 0; left: 280px; }
+
+#map {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  left: 280px;
+}
+
 h2 { font-size: 19px; }
-h3 { font-size: 14px; margin-top: 22px; border-bottom: 1px solid #ddd; padding-bottom: 6px; }
-label { display: block; margin: 10px 0; font-size: 14px; }
+h3 {
+  font-size: 14px;
+  margin-top: 22px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 6px;
+}
+label {
+  display: block;
+  margin: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
 input { margin-right: 8px; }
-button { padding: 6px 10px; margin-right: 4px; cursor: pointer; }
+button {
+  padding: 6px 10px;
+  margin: 0 4px 8px 0;
+  cursor: pointer;
+}
+#status {
+  font-size: 12px;
+  color: #555;
+  overflow-wrap: anywhere;
+}
 @media(max-width:600px) {
   #panel { width: 180px; padding: 9px; }
   #map { left: 180px; }
@@ -36,39 +67,46 @@ button { padding: 6px 10px; margin-right: 4px; cursor: pointer; }
   <button id="showAll">Show all</button>
   <button id="hideAll">Hide all</button>
   <div id="layers"></div>
+  <p id="status">Loading map...</p>
 </div>
+
 <div id="map"></div>
 
 <script type="module">
 import maplibregl from
 'https://unpkg.com/maplibre-gl@5.0.0/dist/maplibre-gl.mjs';
 
+// GeoJSON files are stored in the repository root.
 const groups = [
   {
     name: "Kirat Territories",
     layers: [
-      { name: "Kirat", file: "data/Kiratgeojson.geojson", color: "#d97732" },
-      { name: "Kirat Chiefs", file: "data/Kirat Chiefs.geojson", color: "#b45309" },
-      { name: "Baisye", file: "data/Baisye.geojson", color: "#eab308" },
-      { name: "Bagmati", file: "data/Bagmatigeojson.geojson", color: "#ca8a04" },
-      { name: "Chaubise", file: "data/Chaubise.geojson", color: "#16a34a" },
-      { name: "Eastern Sen", file: "data/Eastern Sen.geojson", color: "#0d9488" }
+      { name: "Kirat", file: "Kirat.geojson", color: "#d97732" },
+      { name: "Kirat Chiefs", file: "Kirat Chiefs.geojson", color: "#b45309" },
+      { name: "Baisye", file: "Baisye.geojson", color: "#eab308" },
+      { name: "Bagmati", file: "Bagmati.geojson", color: "#ca8a04" },
+      { name: "Chaubise", file: "Chaubise.geojson", color: "#16a34a" },
+      { name: "Eastern Sen", file: "Eastern Sen.geojson", color: "#0d9488" }
     ]
   },
   {
     name: "Other Historical Territories",
     layers: [
-      { name: "Gorkha", file: "data/Gorkha.geojson", color: "#2563eb" },
-      { name: "Himanchal", file: "data/Himanchal.geojson", color: "#7c3aed" },
-      { name: "Sikkim", file: "data/Sikkim.geojson", color: "#db2777" },
-      { name: "Uttarkhand", file: "data/Uttarkhand.geojson", color: "#9333ea" }
+      { name: "Gorkha", file: "Gorkha.geojson", color: "#2563eb" },
+      { name: "Himanchal", file: "Himanchal.geojson", color: "#7c3aed" },
+      { name: "Sikkim", file: "Sikkim.geojson", color: "#db2777" },
+      { name: "Uttarkhand", file: "Uttarkhand.geojson", color: "#9333ea" }
     ]
   },
   {
     name: "Geography",
     layers: [
-      { name: "Mountains above 5000m", file: "data/Mountains (above 5000m).geojson", color: "#64748b" },
-      { name: "Outline", file: "data/Outline.geojson", color: "#dc2626" }
+      {
+        name: "Mountains above 5000m",
+        file: "Mountains (above 5000m).geojson",
+        color: "#64748b"
+      },
+      { name: "Outline", file: "Outline.geojson", color: "#dc2626" }
     ]
   }
 ];
@@ -83,82 +121,132 @@ const map = new maplibregl.Map({
 map.addControl(new maplibregl.NavigationControl());
 
 const layerPanel = document.getElementById("layers");
+const status = document.getElementById("status");
 const checkboxes = [];
 
-map.on("load", () => {
-  groups.forEach((group, gi) => {
+map.on("load", async () => {
+  let loaded = 0;
+  let failed = 0;
+
+  for (let gi = 0; gi < groups.length; gi++) {
+    const group = groups[gi];
+
     const heading = document.createElement("h3");
     heading.textContent = group.name;
     layerPanel.appendChild(heading);
 
-    group.layers.forEach((layer, li) => {
+    for (let li = 0; li < group.layers.length; li++) {
+      const layer = group.layers[li];
       const id = `layer-${gi}-${li}`;
       const fillId = `${id}-fill`;
       const lineId = `${id}-line`;
 
       const label = document.createElement("label");
       const checkbox = document.createElement("input");
+
       checkbox.type = "checkbox";
       checkbox.checked = true;
       label.append(checkbox, document.createTextNode(layer.name));
       layerPanel.appendChild(label);
       checkboxes.push(checkbox);
 
-      checkbox.addEventListener("change", () => {
-        const visibility = checkbox.checked ? "visible" : "none";
-        [fillId, lineId].forEach(layerId => {
-          if (map.getLayer(layerId)) {
-            map.setLayoutProperty(layerId, "visibility", visibility);
+      try {
+        const url = new URL(
+          encodeURI(layer.file),
+          window.location.href
+        ).href;
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${url}`);
+        }
+
+        const geojson = await response.json();
+
+        if (!geojson.type ||
+            !["FeatureCollection", "Feature", "Polygon",
+              "MultiPolygon", "GeometryCollection"].includes(geojson.type)) {
+          throw new Error("Invalid GeoJSON structure");
+        }
+
+        map.addSource(id, {
+          type: "geojson",
+          data: geojson
+        });
+
+        map.addLayer({
+          id: fillId,
+          type: "fill",
+          source: id,
+          paint: {
+            "fill-color": layer.color,
+            "fill-opacity": 0.25
           }
         });
-      });
 
-      map.addSource(id, {
-        type: "geojson",
-        data: layer.file
-      });
-
-      map.addLayer({
-        id: fillId,
-        type: "fill",
-        source: id,
-        paint: {
-          "fill-color": layer.color,
-          "fill-opacity": 0.25
-        }
-      });
-
-      map.addLayer({
-        id: lineId,
-        type: "line",
-        source: id,
-        paint: {
-          "line-color": layer.color,
-          "line-width": 1.5
-        }
-      });
-
-      map.on("click", fillId, event => {
-        const properties = event.features[0].properties || {};
-        const popup = document.createElement("div");
-
-        const title = document.createElement("strong");
-        title.textContent = layer.name;
-        popup.appendChild(title);
-
-        Object.entries(properties).slice(0, 12).forEach(([key, value]) => {
-          const row = document.createElement("div");
-          row.textContent = `${key}: ${value ?? ""}`;
-          popup.appendChild(row);
+        map.addLayer({
+          id: lineId,
+          type: "line",
+          source: id,
+          paint: {
+            "line-color": layer.color,
+            "line-width": 1.5
+          }
         });
 
-        new maplibregl.Popup()
-          .setLngLat(event.lngLat)
-          .setDOMContent(popup)
-          .addTo(map);
-      });
-    });
-  });
+        checkbox.addEventListener("change", () => {
+          const visibility = checkbox.checked ? "visible" : "none";
+          map.setLayoutProperty(fillId, "visibility", visibility);
+          map.setLayoutProperty(lineId, "visibility", visibility);
+        });
+
+        map.on("click", fillId, event => {
+          const properties = event.features?.[0]?.properties || {};
+          const popup = document.createElement("div");
+
+          const title = document.createElement("strong");
+          title.textContent = layer.name;
+          popup.appendChild(title);
+
+          Object.entries(properties).slice(0, 12).forEach(([key, value]) => {
+            const row = document.createElement("div");
+            row.textContent = `${key}: ${value ?? ""}`;
+            popup.appendChild(row);
+          });
+
+          new maplibregl.Popup()
+            .setLngLat(event.lngLat)
+            .setDOMContent(popup)
+            .addTo(map);
+        });
+
+        map.on("mouseenter", fillId, () => {
+          map.getCanvas().style.cursor = "pointer";
+        });
+
+        map.on("mouseleave", fillId, () => {
+          map.getCanvas().style.cursor = "";
+        });
+
+        loaded++;
+      } catch (error) {
+        failed++;
+        checkbox.checked = false;
+        label.title = error.message;
+        label.style.color = "#c00";
+        console.error(`Failed to load ${layer.file}:`, error);
+      }
+    }
+  }
+
+  status.textContent =
+    `${loaded} of ${loaded + failed} layers loaded` +
+    (failed ? `. ${failed} failed — check filenames.` : ".");
+});
+
+map.on("error", event => {
+  console.error("Map error:", event.error);
 });
 
 document.getElementById("showAll").onclick = () => {
