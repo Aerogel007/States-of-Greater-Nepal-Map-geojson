@@ -6,7 +6,7 @@ Map of most of the states in greater Nepal before the Unification Campaign
 
 ![Historical Territories map preview](Territories%20of%20Greater%20Nepal.png)
 
-# States Mentioned:
+# States drawn in the map:
 | No. | State | Region |
 |---:|---|---|
 | 1 | Aathrai | Pallo Kirat |
@@ -119,3 +119,63 @@ Map of most of the states in greater Nepal before the Unification Campaign
 | 108 | Chief's under kumaon | Uttarkhand |
 | 109 | Kumaon | Uttarkhand |
 | 110 | Garhwal | Uttarkhand |
+
+#Other potential states but not in the map:
+Bamphi
+Beeja
+Bhagul
+Biskot
+Bhujee
+Bughat
+Bulson
+Burrowlee
+Chinese Tartary
+Comharsain
+Cotrach
+Dalhang
+Darimeka
+Deorali
+Dhamee
+Dudoo Kuwau
+Dhurkottee
+Dulaitoo
+Durryal
+Gajkot
+Ghoond
+Ghopriakot
+Goriakot
+Jhili
+Joobul
+Kaikho
+Kalagaon
+Kearie
+Keonthul
+Khottar
+Khumri
+Khuprikot
+Konyar
+Kotee
+Kotegurh
+Kunaitoo
+Kurrungloo
+Ladakh
+Luttahoon
+Majal
+Malliganta
+Mellianta
+Mulog
+Nawur
+Parthana
+Poin
+Pokhara
+Poondur
+Raeen
+Sare
+Satatala
+Shangree
+Sikh States
+Tadiagarha
+Tarki
+Tatahun
+Theog
+Wigha
