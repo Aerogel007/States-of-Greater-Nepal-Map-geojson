@@ -119,6 +119,7 @@ Map of most of the states in greater Nepal before the Unification Campaign
 | 108 | Chief's under kumaon | Uttarkhand |
 | 109 | Kumaon | Uttarkhand |
 | 110 | Garhwal | Uttarkhand |
+| 111 | Kingdom of LO | Mustang |
 
 # BARHA THAKURAI (12 PRINCEDOMS) 
 1. Keonthul
@@ -185,6 +186,6 @@ Map of most of the states in greater Nepal before the Unification Campaign
 28. Tarki
 29. Tatahun
 30. Wigha
+31. Kingdom of Butwol
     
-Known mistakes:
-- Banfikot is south of Muskot but it should be adjacent North
+
