@@ -120,7 +120,6 @@ Map of most of the states in greater Nepal before the Unification Campaign
 | 109 | Kumaon | Uttarkhand |
 | 110 | Garhwal | Uttarkhand |
 
-# ==========================================
 # BARHA THAKURAI (12 PRINCEDOMS) 
 1. Keonthul
 2. Bughat
@@ -135,7 +134,6 @@ Map of most of the states in greater Nepal before the Unification Campaign
 11. Konyar
 12. Mungul
 
-# ==========================================
 # ATHARA THAKURAI (18 PRINCEDOMS)
 1. Joobul
 2. Dulaitoo
@@ -156,7 +154,6 @@ Map of most of the states in greater Nepal before the Unification Campaign
 17. Kurrungloo
 18. Ghoond (Gotrach)
 
-# ==========================================
 #Other potential states but not in the map:
 1. Bamphi
 2. Biskot
