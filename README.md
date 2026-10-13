@@ -154,7 +154,7 @@ Map of most of the states in greater Nepal before the Unification Campaign
 17. Kurrungloo
 18. Ghoond (Gotrach)
 
-#Other potential states but not in the map:
+# Other potential states but not in the map:
 1. Bamphi
 2. Biskot
 3. Cotrach
