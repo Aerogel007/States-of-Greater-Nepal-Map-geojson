@@ -157,35 +157,34 @@ Map of most of the states in greater Nepal before the Unification Campaign
 #Other potential states but not in the map:
 1. Bamphi
 2. Biskot
-3. Chinese Tartary
-4. Cotrach
-5. Dalhang
-6. Darimeka
-7. Deorali
-8. Durryal
-9. Gajkot
-10. Ghoond
-11. Ghopriakot
-12. Goriakot
-13. Jhili
-14. Kaikho
-15. Kalagaon
-16. Khumri
-17. Khuprikot
-18. Ladakh
-19. Luttahoon
-20. Majal
-21. Malliganta
-22. Mellianta
-23. Parthana
-24. Poin
-25. Pokhara
-26. Satatala
-27. Sikh States
-28. Tadiagarha
-29. Tarki
-30. Tatahun
-31. Wigha
-
+3. Cotrach
+4. Dalhang
+5. Darimeka
+6. Deorali
+7. Durryal
+8. Gajkot
+9. Ghoond
+10. Ghopriakot
+11. Goriakot
+12. Jhili
+13. Kaikho
+14. Kalagaon
+15. Khumri
+16. Khuprikot
+17. Ladakh
+18. Luttahoon
+19. Majal
+20. Malliganta
+21. Mellianta
+22. Parthana
+23. Poin
+24. Pokhara
+25. Satatala
+26. Sikh States
+27. Tadiagarha
+28. Tarki
+29. Tatahun
+30. Wigha
+    
 Known mistakes:
 - Banfikot is south of Muskot but it should be adjacent North
